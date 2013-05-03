@@ -1,31 +1,36 @@
 package core;
 
-import lejos.nxt.SensorPort;
+import lejos.nxt.Motor;
+import lejos.nxt.MotorPort;
+import lejos.nxt.NXTRegulatedMotor;
+
 
 public class Drill extends Thread {
-	public SensorPort port;
+	public MotorPort port;
 	public boolean running;
+	private NXTRegulatedMotor motor;
 	
 	
-	public Drill(SensorPort p) {
+	public Drill(MotorPort p) {
 		port=p;
+		motor = new NXTRegulatedMotor(p);
 	}
 	
 	
 	public void run() {
 		running = true;
 		if (running) {
-			port.activate();
+			motor.forward();
 		}		
 	}
 	
 	public boolean isRotating() {
-		return port.readBooleanValue();
+		return motor.isMoving();
 	}
 	
 	
 	public void close() {
-		port.passivate();
+		motor.stop();
 	}
 	
 	

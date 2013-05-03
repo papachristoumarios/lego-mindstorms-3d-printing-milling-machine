@@ -232,10 +232,10 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 	
 	public static void G1 (Point3D start_point, Point3D end_point, float velocity) {
 		
-		Drill drill = new Drill(SensorPort.S4);
+		Drill drill = new Drill(MotorPort.A);
 		drill.start();
 		G0(start_point, end_point, velocity);
-		drill.stop();
+		drill.close();
 	}
 	
 	
