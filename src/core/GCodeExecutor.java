@@ -18,27 +18,39 @@ public static final NXTRegulatedMotor mz = new NXTRegulatedMotor(MotorPort.C);
 public static final TouchSensor tx = new TouchSensor(SensorPort.S1);
 public static final TouchSensor ty = new TouchSensor(SensorPort.S2);
 public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
+public static final Drill drill = new Drill(MotorPort.A); //TODO! 
 
 
 
-	
+	/**
+	 * Method that homes (moves to origin) Y axis
+	 * @param velocity
+	 */
 	private static void homeY(float velocity) {
 		my.setSpeed(velocity);
-		while(ty.isPressed() == false) {
+		while(!ty.isPressed()) {
 			my.rotate(10);
 		}
 	}
 	
+	/**
+	 * Method that homes (moves to origin) Z axis
+	 * @param velocity
+	 */
 	private static void homeZ(float velocity) {
 		mz.setSpeed(velocity);
-		while(tz.isPressed() == false) {
+		while(!tz.isPressed()) {
 			mz.rotate(10);
 		}
 	}
 	
+	/**
+	 * Method that homes (moves to origin) X axis
+	 * @param velocity
+	 */
 	private static void homeX(float velocity) {
 		mx.setSpeed(velocity);
-		while(tx.isPressed() == false) {
+		while(!tx.isPressed()) {
 			mz.rotate(-10);
 		}
 		
@@ -69,7 +81,12 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 	
 	
 	
-	
+	/**
+	 * Rapid Positioning (in 2D)
+	 * @param start_point
+	 * @param end_point
+	 * @param velocity
+	 */
 	public static void G0 (Point start_point, Point end_point, float velocity) {
 		int sidex = (int) (end_point.x - start_point.x);		
 		int sidey = (int) (end_point.y - start_point.y);
@@ -90,6 +107,12 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 		finally {System.gc();};
 	}
 	
+	/**
+	 * Rapid Positioning (in 3D)
+	 * @param start_point
+	 * @param end_point
+	 * @param velocity
+	 */
 	public static void G0 (Point3D start_point,Point3D end_point,float velocity) {
 		int sidex = (int) (end_point.x - start_point.x);		
 		int sidey = (int) (end_point.y - start_point.y);
@@ -113,7 +136,12 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 		//mover_x = null; mover_y = null; mover_z = null; System.gc();
 	}
 	
-	
+	/**
+	 * Circular Arc (only in 2D)
+	 * @param start_point
+	 * @param end_point
+	 * @param velocity
+	 */
 	public static void G2 (Point start_point,Point end_point, float velocity) {
 		int sidex = (int) (end_point.x - start_point.x);		
 		int sidey = (int) (end_point.y - start_point.y);
@@ -137,16 +165,37 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 	
 	
 	
-	
+	/**
+	 * Linear Interpolation / Controlled Move (in 3D)
+	 * @param start_point
+	 * @param end_point
+	 * @param velocity
+	 */
 	public static void G1 (Point3D start_point, Point3D end_point, float velocity) {
 		
-		Drill drill = new Drill(MotorPort.A);
 		drill.start();
 		G0(start_point, end_point, velocity);
 		drill.close();
 	}
 	
+	/**
+	 * Linear Interpolation / Controlled Move (in 2D)
+	 * @param start_point
+	 * @param end_point
+	 * @param velocity
+	 */
+	public static void G1 (Point start_point, Point end_point, float velocity) {
+		drill.start();
+		G0(start_point,end_point,velocity);
+		drill.close();
+		
+	}
 	
+	
+	/**
+	 * Ends current program and closes NXT Connection
+	 * @throws InterruptedException
+	 */
 	public static void M2() throws InterruptedException {
 		System.out.println("End of program");
 		try {
@@ -158,26 +207,20 @@ public static final TouchSensor tz = new TouchSensor(SensorPort.S3);
 	
 	
 	/**
-	 * Freezes the execution of the program until the user presses the ENTER Button on the NXT 
+	 * Freezes the execution of the program until the user presses a Button on the NXT 
 	 */
 	public static void M0() { 
-		while(Button.ENTER.isDown() == false) {
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {};
-		}
-		
-		
+		Button.waitForAnyPress();		
 	}
 	
-
+	/**
+	 * Freezes the execution of the program 
+	 * @param stop_switch
+	 */
 	public static void M1(boolean stop_switch) {
-		if (stop_switch) {
-			while(Button.ENTER.isDown() == false) {
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {};
-			}
+		if (stop_switch) { 
+			Button.waitForAnyPress();
 		}
 	}
+
 }
