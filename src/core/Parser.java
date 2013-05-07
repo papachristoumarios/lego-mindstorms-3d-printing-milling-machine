@@ -16,6 +16,11 @@ import lejos.nxt.Motor;
  */
 
 public class Parser {
+	
+	public static final double CHIP_LOAD = 0.02;
+	public static final int TEETH = 8;
+	
+	
 	public static boolean OPTIONAL_STOP_SWITCH = false;
 	public Parser() {
 	}
@@ -128,8 +133,46 @@ public class Parser {
 			
 			
 			
-		} //get		
+		} //get	
 		
+		/**
+		 * Returns rotational frequency from given feedrate
+		 * @param feedrate
+		 * @param unit_mode (0 to return rad/sec and 1 to return deg/sec)
+		 * @return
+		 */
+		public static double getRotationalFrequency(float feedrate, int unit_mode) {
+			if (unit_mode == 1) { 
+				final double c = (Math.PI * Math.PI) / (TEETH * CHIP_LOAD);
+				return c * feedrate;
+			} else if (unit_mode == 0) {
+				final double c = (2*Math.PI) / (TEETH * CHIP_LOAD);
+				return c * feedrate;
+			} else {
+				return 0;
+			}
+		}
 		
-				}
+		/**
+		 * Returns feedrate from given rotational frequency
+		 * @param rotational_frequency
+		 * @param unit_mode (0 to give rad/sec as argument and 1 to give deg/sec as argument)
+		 * @return
+		 */
+		public static double getFeedrate(float rotational_frequency, int unit_mode) {
+			if (unit_mode == 1) { 
+				final double c = (Math.PI * Math.PI) / (TEETH * CHIP_LOAD);
+				return rotational_frequency / c;
+			} else if (unit_mode == 0) {
+				final double c = (2*Math.PI) / (TEETH * CHIP_LOAD);
+				return rotational_frequency / c;
+			} else {
+				return 0;
+			}
+		}
+			
+			
+					
+		}
+
 //class

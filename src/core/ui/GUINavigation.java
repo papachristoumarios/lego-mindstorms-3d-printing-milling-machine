@@ -12,6 +12,7 @@ import lejos.nxt.Motor;
 import lejos.nxt.NXT;
 import lejos.nxt.Sound;
 import lejos.nxt.comm.Bluetooth;
+import lejos.nxt.comm.USB;
 import lejos.nxt.remote.NXTComm;
 
 import javax.swing.JCheckBox;
@@ -26,6 +27,7 @@ public class GUINavigation {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		//System.out.println(USB.getAddress());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -49,7 +51,7 @@ public class GUINavigation {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("GUI Navigation");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[][][][][][][][][]", "[][][][][][][][][][]"));
@@ -62,8 +64,9 @@ public class GUINavigation {
 		});
 		frame.getContentPane().add(beepButton, "cell 1 0");
 		
+		/*
 		JCheckBox drillToggle = new JCheckBox("Drill Toggle");
-		frame.getContentPane().add(drillToggle, "cell 3 0 2 1");
+		frame.getContentPane().add(drillToggle, "cell 3 0 2 1"); */
 		
 		JButton zstop = new JButton("Stop!");
 		zstop.addActionListener(new ActionListener() {
@@ -87,8 +90,7 @@ public class GUINavigation {
 			}
 		});
 		
-		JLabel connectionLabel = new JLabel("Connection : No");
-		frame.getContentPane().add(connectionLabel, "cell 7 0 2 1");
+		
 		
 		JLabel zlabel = new JLabel("Z");
 		frame.getContentPane().add(zlabel, "cell 6 2,alignx center");
@@ -170,7 +172,7 @@ public class GUINavigation {
 		JLabel lblNewLabel = new JLabel("Velocity");
 		frame.getContentPane().add(lblNewLabel, "cell 1 7");
 		
-		JButton shutdown = new JButton("Shutdown NXT");
+		JButton shutdown = new JButton("Close connection");
 		shutdown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NXT.exit(0);
@@ -178,10 +180,14 @@ public class GUINavigation {
 		});
 		frame.getContentPane().add(shutdown, "cell 1 9");
 		
-
-
+		
+		//TODO Add it to till next release
+		//JLabel lblNewLabel_1 = new JLabel("USB Address: ");
+		//frame.getContentPane().add(lblNewLabel_1, "cell 3 9");
+		
+		
+		
 	}
 	
 	
-
 }
