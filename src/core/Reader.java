@@ -54,7 +54,11 @@ import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
 
-
+/**
+ * Handles GCode files as a reader
+ * @author Marios Papachristou
+ *
+ */
 public class Reader {
 
 	public String file;
@@ -63,6 +67,11 @@ public class Reader {
 		
 	}
 	
+	/**
+	 * Casts a text file into a String
+	 * @param file
+	 * @return file as string
+	 */
     public String fileToString(String file) {
         String result = null;
         DataInputStream in = null;
@@ -86,7 +95,11 @@ public class Reader {
     
 		
 
-	
+	/**
+	 * Splits GCode code into matrices
+	 * @param code
+	 * @return <code>String[][][]</code>
+	 */
 	public String[][][] splitCode(String code) {
 		String[] astring = split("\n", code);
 		
@@ -98,7 +111,11 @@ public class Reader {
 	}
 	
 	
-
+	/**
+	 * Splits a line of GCode
+	 * @param line
+	 * @return <code>String[][]</code>
+	 */
 	public String[][] splitLine(String line) {
 		String[] astring = split(" ", line);
 		ArrayList<String[]> list = new ArrayList<String[]>();

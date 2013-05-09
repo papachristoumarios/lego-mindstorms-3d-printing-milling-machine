@@ -11,7 +11,6 @@ import lejos.nxt.Motor;
 /**
  * G-Code Parser
  * @author Marios Papachristou (mrmarios97@gmail.com) 
- * @version 0.1
  * @category Main Application
  */
 
