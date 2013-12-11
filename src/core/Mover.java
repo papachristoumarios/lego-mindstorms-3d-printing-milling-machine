@@ -17,12 +17,8 @@ public class Mover extends Thread{
 		motor.setSpeed(velocity);
 		motor.rotate((int) length);
 
+	}		
 	}
-		
-		
-		
-	}
-
 }
 
 
