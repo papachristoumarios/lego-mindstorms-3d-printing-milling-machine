@@ -1,7 +1,5 @@
 package core;
 
-import java.util.ArrayList;
-
 /**
  * This class can be used to create simple harmonic oscilators. The standard equation for an harmonic oscilator is <code>x(t)=A*sin(ωt + φ_0)<code>
  * @author marios
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 class HarmonicOscilator {
 		double period,width,initial_phase;
 	int resolution,ending;
-	Point3D points;
+	Point3D[] points;
 	
 	/**
 	 * 
@@ -24,8 +22,9 @@ class HarmonicOscilator {
 		period = T; width=A; φ_0=initial_phase; resolution=res; ending=end;
 		for(int t=0; t<=end; t = t +res) {
 			double n = A * Math.sin(((2*Math.PI)/T) * t + φ_0);
-			points.x = t;
-			points.y = (float) n;
+			points[t].x = t;
+			points[t].y = (float) n;
+			
 		}
 	}	
 }
