@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class HarmonicOscilator {
 		double period,width,initial_phase;
 	int resolution,ending;
-	double[] points;
+	Point3D points;
 	
 	/**
 	 * 
@@ -24,7 +24,8 @@ class HarmonicOscilator {
 		period = T; width=A; φ_0=initial_phase; resolution=res; ending=end;
 		for(int t=0; t<=end; t = t +res) {
 			double n = A * Math.sin(((2*Math.PI)/T) * t + φ_0);
-			points[t] = n;
+			points.x = t;
+			points.y = (float) n;
 		}
 	}	
 }
