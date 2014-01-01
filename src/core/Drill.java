@@ -4,7 +4,7 @@ import lejos.nxt.MotorPort;
 import lejos.nxt.NXTRegulatedMotor;
 
 /**
- * Threaded class to controll the drill
+ * Threaded class to controll the drill via Relay
  * @author Marios Papachristou
  *
  */

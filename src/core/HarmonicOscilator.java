@@ -1,7 +1,7 @@
 package core;
 
 /**
- * This class can be used to create simple harmonic oscilators. The standard equation for an harmonic oscilator is <code>x(t)=A*sin(ωt + φ_0)<code>
+ * This class can be used to create simple harmonic oscilators. The standard equation for an harmonic oscilator is <code>x(t)=A*sin(ωt + φ_0)</code>
  * @author marios
  *
  */
@@ -27,4 +27,27 @@ class HarmonicOscilator {
 			
 		}
 	}	
+	
+	/**
+	 * <code>x = a*sin(ωt + φ_0) + b*sin(θt + c_0)</code>
+	 * @param Oscilator A
+	 * @param Oscilator B
+	 * @param angle between a.width and b.width
+	 * @return
+	 * @throws Exception
+	 */
+	public static HarmonicOscilator synthesizeOscilators (HarmonicOscilator a, HarmonicOscilator b, double angle) throws Exception {
+		if (a.ending == b.ending && a.resolution == b.resolution) {
+		HarmonicOscilator h = null;
+		h.width = Math.sqrt(Math.pow(a.width, 2) + Math.pow(b.width, 2) + 2*a.width*b.width*Math.cos(angle));//cosine law 
+		for (int t=0; t<=a.ending; t+=a.resolution) {
+			double n = a.width* Math.sin(((2*Math.PI)/a.period) * t + a.initial_phase) + b.width* Math.sin(((2*Math.PI)/b.period) * t + b.initial_phase);
+			h.points[t].x = t;
+			h.points[t].y = (float) n;
+			}
+		return h;
+		}
+		throw new Exception("Cannot synthesize oscilations");
+		
+	}
 }
