@@ -4,7 +4,30 @@
 #define MIN_UNIT 0
 #define MED_UNIT 512
 #define MAX_UNIT 1024
+/**
+Component		|		Symbol
+--------------------------||-----------------------
+Digital Pin 6(PWM)	|			D6~		(referred as TPIN)
+Ground			|			GND
+Motor			|			M
+DCV Source		|			+5V
+10kOhm Resistor	|		--/\/\/\/\/\--
+Diode			|		--->|----
+P2N2222AG			  	--C B E--
+Transistor		|		      |	
 
+Schematic:
+
+	 /---->|------\
+	|		  |
+	|-----M-------|
+	|		  |
++5V------------------C B E-----------GND
+				|
+				|
+				\-------/\/\/\/\/\-----D6~
+
+**/
 byte x = 0;
 
 void setup() {
