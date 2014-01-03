@@ -33,30 +33,32 @@ byte x = 0;
 void setup() {
   Wire.begin(ADDR);
   Wire.onReceive(receiveEvent);
-  Wire.onRequest(requestEvent);
+  //Wire.onRequest(requestEvent);
   pinMode(TPIN, OUTPUT);
 }
 
-void loop() {} //TODO
+void loop() {
+  delay(1);
+} //TODO
 
-void receiveEvent(int N) {
- while(1 < Wire.avalable()) {
+void receiveEvent(int howMany) {
+  while(1 < Wire.available()) {
     x = Wire.read();
-    switch(x) {
-      case 0: //Stopped
-        analogWrite(TPIN, MIN_UNIT);
-        break;
-      case 1:
-        analogWrite(TPIN, MED_UNIT);
-        break;
-      case 2:
-        analogWrite(TPIN, MAX_UNIT); 
-    }
- } 
-  
+      switch (x) {
+    case 0:
+      analogWrite(TPIN,MIN_UNIT);
+      break;
+    case 1:
+      analogWrite(TPIN,MED_UNIT);
+      break;
+    case 2:
+      analogWrite(TPIN, MAX_UNIT);  
+      break;    
+      }
+}
 }
 
-void requestEvent(int N) {
+void requestEvent() {
  Wire.write(x);  
 }
 
