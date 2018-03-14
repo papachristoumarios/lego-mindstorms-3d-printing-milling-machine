@@ -1,7 +1,7 @@
 lego-mindstorms-3d-printing-milling-machine
 ===========================================
 
-**DISCLAIMER** The original project was hosted in Google Code under https://code.google.com/archive/p/lego-mindstorms-3d-printing-machine/ which unfortunately closed and the project had to be moved here. 
+**DISCLAIMER** The original project was hosted in Google Code under https://code.google.com/archive/p/lego-mindstorms-3d-printing-machine/ which unfortunately closed and the project had to be moved here. The project also had a detailed wiki which was unfortunatyely deleted during the migration from Google Code to Github. 
 
 So here is the original README from Google Code
 
